@@ -127,6 +127,7 @@ downloadButton.click(function() {
 
 colorBox.click(function() {
     isSelectingColor = true;
+    $('body').addClass('picking-color');
 });
 
 function mouseInCanvas() {
@@ -134,7 +135,10 @@ function mouseInCanvas() {
 }
 
 function mouseClicked() {
-    if (mouseInCanvas()) isSelectingColor = false;
+    if (mouseInCanvas()) {
+        isSelectingColor = false;
+        $('body').removeClass('picking-color');
+    }
 }
 
 // FILTERS //

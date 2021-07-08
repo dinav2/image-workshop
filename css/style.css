@@ -13,6 +13,10 @@ body {
 	display: flex;
 }
 
+.picking-color {
+	cursor: url(../assets/colorpicker.cur), pointer;
+}
+
 #left {
 	width: 100vw;
 }
