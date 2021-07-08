@@ -61,6 +61,24 @@ body {
 	color: white;
 }
 
+#choose-button {
+	margin-right: 5px;
+	border-radius: 15px;
+	border: 2px solid #3F42A2;
+	padding: 5px;
+	background-color: #3F42A2;
+}
+
+#files {
+	display: none;
+}
+
+#choose-button:hover {
+	background-color: #333684;
+	border: 2px solid #333684;
+	cursor: pointer;
+}
+
 #dropzone.dragover {
 	border: 2px solid white;
 	background-color: rgba(0,0,0, 0.7);
@@ -83,8 +101,8 @@ body {
 }
 
 #extra-settings {
+	display: none;
 	margin-top: 20px;
-	display: flex;
 	align-items: center;
 }
 

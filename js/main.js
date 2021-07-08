@@ -15,8 +15,10 @@ const toleranceSlider = $('#tolerance-slider')
 
 const leftPanel = document.querySelector('#left');
 const rightPanel = document.querySelector('#right');
+const extraSettings = document.querySelector('#extra-settings')
 
 const presetSelect = $('#preset-select');
+
 
 let sc_r = 0, sc_g = 0, sc_b = 0;
 
@@ -29,6 +31,13 @@ function setup() {
     const htmlDropzone = select('#dropzone');
     const htmlCanvas = select('#canvas-container');
 
+    let input = createFileInput(function(file) {
+        animate(file);
+    })
+
+    input.parent(htmlDropzone);
+    input.id("files");
+
     htmlDropzone.dragOver(function() {
         htmlDropzone.addClass('dragover');
     })
@@ -38,18 +47,8 @@ function setup() {
     })
 
     htmlDropzone.drop(function(file) {
-        uploadedImage = loadImage(file.data);
-        resizeCanvas(width, height);
-
-        rightPanel.style.display = "flex";
-        gsap.to('#left, #right', {
-            duration: 2,
-            width: "50vw"
-        })
-
-        
-
         htmlDropzone.removeClass('dragover');
+        animate(file);
     })
 }
 
@@ -94,8 +93,14 @@ function draw() {
 
     if(presetSelect.val() === 'grayscale') grayscale(pixels);
     else if (presetSelect.val() === 'bnw') bnw(pixels);
-    else if (presetSelect.val() === 'sc') singleColor(pixels)
-    else defaultFilter(pixels);
+    else if (presetSelect.val() === 'sc') {
+        singleColor(pixels)
+        extraSettings.style.display = "flex";
+    } 
+    else {
+        defaultFilter(pixels);
+        extraSettings.style.display = "none";
+    } 
 
     updatePixels();
 } 
@@ -139,6 +144,17 @@ function mouseClicked() {
         isSelectingColor = false;
         $('body').removeClass('picking-color');
     }
+}
+
+function animate(file) {
+    uploadedImage = loadImage(file.data);
+    resizeCanvas(width, height);
+
+    rightPanel.style.display = "flex";
+    gsap.to('#left, #right', {
+        duration: 2,
+        width: "50vw"
+    })
 }
 
 // FILTERS //
